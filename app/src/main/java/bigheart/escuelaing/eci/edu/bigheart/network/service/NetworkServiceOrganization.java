@@ -9,7 +9,7 @@ import retrofit2.http.POST;
 
 public interface NetworkServiceOrganization {
 
-    @POST( "organization" )
+    @POST("/organization")
     Call<Organization> createOrganization(@Body Organization o);
 
 }

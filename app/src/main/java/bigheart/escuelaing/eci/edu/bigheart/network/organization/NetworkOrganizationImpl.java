@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkOrganizationImpl implements NetworkOrganization {
 
-    private static final String BASE_URL = "http://autenticationserver.herokuapp.com/";
+    private static final String BASE_URL = "https://bighearth.herokuapp.com/";
     private NetworkServiceOrganization nso;
     private ExecutorService backgroundExecutor = Executors.newFixedThreadPool( 1 );
 

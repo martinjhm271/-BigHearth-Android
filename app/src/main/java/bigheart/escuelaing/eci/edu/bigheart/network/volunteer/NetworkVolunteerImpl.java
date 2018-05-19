@@ -4,7 +4,6 @@ package bigheart.escuelaing.eci.edu.bigheart.network.volunteer;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import bigheart.escuelaing.eci.edu.bigheart.model.Volunteer;
 import bigheart.escuelaing.eci.edu.bigheart.network.service.NetworkException;
 import bigheart.escuelaing.eci.edu.bigheart.network.service.NetworkServiceVolunteer;
@@ -19,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkVolunteerImpl implements NetworkVolunteer {
 
-    private static final String BASE_URL = "http://autenticationserver.herokuapp.com/";
+    private static final String BASE_URL = "https://bighearth.herokuapp.com/volunteer/";
     private NetworkServiceVolunteer nsv;
     private ExecutorService backgroundExecutor = Executors.newFixedThreadPool( 1 );
 
