@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -33,6 +34,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -49,6 +53,9 @@ import bigheart.escuelaing.eci.edu.bigheart.network.organization.NetworkOrganiza
 import bigheart.escuelaing.eci.edu.bigheart.network.service.NetworkException;
 import bigheart.escuelaing.eci.edu.bigheart.network.service.RequestCallback;
 import bigheart.escuelaing.eci.edu.bigheart.network.volunteer.NetworkVolunteerImpl;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class RegistrationVolunteerActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -130,6 +137,7 @@ public class RegistrationVolunteerActivity extends AppCompatActivity implements 
                 if(resultCode == -1){
                     try{
                         Uri imageUri = imageReturnedIntent.getData();
+                        iv.setImageURI(null);
                         iv.setImageURI(imageUri);
                         break;
                     }catch(Exception e){}
@@ -147,7 +155,6 @@ public class RegistrationVolunteerActivity extends AppCompatActivity implements 
                 @Override
                 public void run() {
                     List<Event> evs=new ArrayList<>();
-                    base64Photo=toBase64Photo();
 
                     Volunteer v = new Volunteer(0,
                             t11.getEditText().getText().toString(),
@@ -160,7 +167,7 @@ public class RegistrationVolunteerActivity extends AppCompatActivity implements 
                             t17.getEditText().getText().toString(),
                             "",
                             0,
-                            base64Photo,
+                            null,
                             new RolUser(t18.getEditText().getText().toString(),new Roles(2,"Volunteer")),
                             t19.getEditText().getText().toString(),
                             "",
@@ -169,10 +176,41 @@ public class RegistrationVolunteerActivity extends AppCompatActivity implements 
                     nvi.createVolunteer(v,new RequestCallback<Volunteer>() {
                         @Override
                         public void onSuccess(final Volunteer response) {
-                            Toast.makeText(applicationContext,"Registration success!!!!",Toast.LENGTH_SHORT).show();
 
-                            //falta iniciar la actividad del login de carlos
+                            //create a new file
+                            File imageFile = null;
+                            MultipartBody.Part body=null;
+                            try {
+                                imageFile = createImageFile();
+                                //save the image in the file
+                                BitmapDrawable draw = (BitmapDrawable) iv.getDrawable();
+                                Bitmap bitmap = draw.getBitmap();
+                                FileOutputStream outStream = null;
+                                File sdCard = Environment.getExternalStorageDirectory();
+                                outStream = new FileOutputStream(imageFile);
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
+                                outStream.flush();
+                                outStream.close();
+                                // create RequestBody instance from file
+                                RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), imageFile);
+                                body = MultipartBody.Part.createFormData("uploaded_file", imageFile.getName(), requestFile);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
 
+                            nvi.setVolunteerImage(response.getMail().getMail(),body,new RequestCallback<Volunteer>() {
+                                        @Override
+                                        public void onSuccess(final Volunteer response) {
+                                            Toast.makeText(applicationContext,"Registration success!!!!",Toast.LENGTH_SHORT).show();
+                                            //falta iniciar la actividad del login de carlos
+                                        }
+
+                                        @Override
+                                        public void onFailed(NetworkException e) {
+                                            Toast.makeText(applicationContext,"Error uploading photo,please try again!!!!",Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                            );
                         }
 
                         @Override
@@ -212,8 +250,12 @@ public class RegistrationVolunteerActivity extends AppCompatActivity implements 
 
 
                 } else if (items[which].equals("Choose From Gallery")) {
-                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(intent,SELECT_FILE);
+                    //Intent intent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    //select a picture
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(Intent.createChooser(intent, "Select Picture"),SELECT_FILE);
                 }
             }
         };
@@ -230,7 +272,18 @@ public class RegistrationVolunteerActivity extends AppCompatActivity implements 
         d.show();
     }
 
-
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = this.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+        return image;
+    }
 
 
     public boolean validation(){
@@ -268,21 +321,7 @@ public class RegistrationVolunteerActivity extends AppCompatActivity implements 
 
     }
 
-    public String toBase64Photo(){
-        File imagefile = new File(selectedImageUri.getPath());
-        FileInputStream fis = null;
-        try{
-            fis = new FileInputStream(imagefile);
-        }catch(FileNotFoundException e){
-            e.printStackTrace();
-        }
-        Bitmap bm = BitmapFactory.decodeStream(fis);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
-        byte[] b = baos.toByteArray();
-        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
-        return encImage;
-    }
+
 
 
 }
