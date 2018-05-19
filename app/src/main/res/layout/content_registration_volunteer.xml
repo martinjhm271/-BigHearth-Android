@@ -29,9 +29,8 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,8 +44,7 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/t11"
                 android:layout_width="192dp"
-                android:layout_height="@android:dimen/app_icon_size"
-                android:padding="4dp">
+                android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
@@ -57,8 +55,7 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/t12"
                 android:layout_width="192dp"
-                android:layout_height="@android:dimen/app_icon_size"
-                android:padding="4dp">
+                android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
@@ -75,8 +72,7 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/t13"
                 android:layout_width="192dp"
-                android:layout_height="@android:dimen/app_icon_size"
-                android:padding="4dp">
+                android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
@@ -86,10 +82,8 @@
 
             <EditText
                 android:id="@+id/t14"
-                android:layout_width="wrap_content"
+                android:layout_width="192dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
                 android:hint="Born Data"
                 android:inputType="date" />
 
@@ -103,8 +97,7 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/t15"
                 android:layout_width="192dp"
-                android:layout_height="@android:dimen/app_icon_size"
-                android:padding="4dp">
+                android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
@@ -115,8 +108,7 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/t16"
                 android:layout_width="192dp"
-                android:layout_height="@android:dimen/app_icon_size"
-                android:padding="4dp">
+                android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
@@ -133,8 +125,7 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/t17"
                 android:layout_width="192dp"
-                android:layout_height="@android:dimen/app_icon_size"
-                android:padding="4dp">
+                android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
@@ -145,8 +136,7 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/t18"
                 android:layout_width="192dp"
-                android:layout_height="@android:dimen/app_icon_size"
-                android:padding="4dp">
+                android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
@@ -163,8 +153,7 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/t19"
                 android:layout_width="192dp"
-                android:layout_height="@android:dimen/app_icon_size"
-                android:padding="4dp">
+                android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
@@ -175,8 +164,7 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/t20"
                 android:layout_width="192dp"
-                android:layout_height="@android:dimen/app_icon_size"
-                android:padding="4dp">
+                android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"

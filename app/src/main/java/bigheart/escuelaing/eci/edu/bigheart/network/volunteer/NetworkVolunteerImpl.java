@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import bigheart.escuelaing.eci.edu.bigheart.model.Event;
+import bigheart.escuelaing.eci.edu.bigheart.model.Organization;
 import bigheart.escuelaing.eci.edu.bigheart.model.Volunteer;
 import bigheart.escuelaing.eci.edu.bigheart.network.service.NetworkException;
 import bigheart.escuelaing.eci.edu.bigheart.network.service.NetworkServiceVolunteer;
@@ -16,6 +18,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import okhttp3.MultipartBody.Part;
 
 public class NetworkVolunteerImpl implements NetworkVolunteer {
 
@@ -44,6 +47,41 @@ public class NetworkVolunteerImpl implements NetworkVolunteer {
                 }
             }
         } );
+
+    }
+
+    @Override
+    public void getVolunteerByEmail(String email, RequestCallback<Volunteer> requestCallback) {
+
+    }
+
+    @Override
+    public void getVolunteerById(Integer id, RequestCallback<Volunteer> requestCallback) {
+
+    }
+
+    @Override
+    public void getEvents(String email, RequestCallback<Event[]> requestCallback) {
+
+    }
+
+    @Override
+    public void getEventsById(String id, RequestCallback<Volunteer> requestCallback) {
+
+    }
+
+    @Override
+    public void updateVolunteer(Volunteer v, RequestCallback<Volunteer> requestCallback) {
+
+    }
+
+    @Override
+    public void setVolunteerImage(String email, Part m, RequestCallback<Volunteer> requestCallback) {
+
+    }
+
+    @Override
+    public void getVolunteerImage(String email, RequestCallback<Volunteer> requestCallback) {
 
     }
 

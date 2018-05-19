@@ -78,8 +78,6 @@ public class RegistrationVolunteerActivity extends AppCompatActivity implements 
         this.t18=findViewById(R.id.t18);
         this.t19=findViewById(R.id.t19);
         this.t20=findViewById(R.id.t20);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
-        setSupportActionBar(toolbar);
         nvi = new NetworkVolunteerImpl();
 
 

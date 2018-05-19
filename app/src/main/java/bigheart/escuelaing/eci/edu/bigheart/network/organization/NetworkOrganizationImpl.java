@@ -4,6 +4,8 @@ package bigheart.escuelaing.eci.edu.bigheart.network.organization;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import bigheart.escuelaing.eci.edu.bigheart.model.Event;
 import bigheart.escuelaing.eci.edu.bigheart.model.Organization;
 import bigheart.escuelaing.eci.edu.bigheart.network.service.NetworkException;
 import bigheart.escuelaing.eci.edu.bigheart.network.service.NetworkServiceOrganization;
@@ -15,6 +17,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import okhttp3.MultipartBody.Part;
 
 public class NetworkOrganizationImpl implements NetworkOrganization {
 
@@ -44,6 +47,36 @@ public class NetworkOrganizationImpl implements NetworkOrganization {
                 }
             }
         } );
+
+    }
+
+    @Override
+    public void getOrganizationByEmail(String email, RequestCallback<Organization> requestCallback) {
+
+    }
+
+    @Override
+    public void getOrganizationByIdEvent(Integer id, RequestCallback<Organization> requestCallback) {
+
+    }
+
+    @Override
+    public void getEvents(Integer NIT, RequestCallback<Event[]> requestCallback) {
+
+    }
+
+    @Override
+    public void updateOrganization(Organization o, RequestCallback<Organization> requestCallback) {
+
+    }
+
+    @Override
+    public void setOrganizationImage(String email, Part m, RequestCallback<Organization> requestCallback) {
+
+    }
+
+    @Override
+    public void getOrganizationImage(String email, RequestCallback<Organization> requestCallback) {
 
     }
 
