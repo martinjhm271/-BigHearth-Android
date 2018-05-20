@@ -15,7 +15,7 @@ import retrofit2.http.Multipart;
 
 public interface NetworkServiceOrganization {
 
-    @POST( "organization" )
+    @POST("/organization")
     Call<Organization> createOrganization(@Body Organization o);
 
     @GET ("organization/{email}")

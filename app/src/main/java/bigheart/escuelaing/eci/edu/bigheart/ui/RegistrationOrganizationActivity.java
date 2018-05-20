@@ -1,40 +1,32 @@
 package bigheart.escuelaing.eci.edu.bigheart.ui;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Base64;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
-
+import com.hbb20.CountryCodePicker;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,14 +34,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import bigheart.escuelaing.eci.edu.bigheart.R;
 import bigheart.escuelaing.eci.edu.bigheart.model.Event;
 import bigheart.escuelaing.eci.edu.bigheart.model.Organization;
@@ -65,8 +55,9 @@ import retrofit2.http.Multipart;
 
 public class RegistrationOrganizationActivity extends AppCompatActivity implements View.OnClickListener{
 
-    TextInputLayout t10,t1,t2,t3,t4,t5,t6,t7,t8,t9= null;
+    TextInputLayout t10,t1,t2,t4,t5,t6,t7,t8,t9= null;
     ImageButton iv=null;
+    CountryCodePicker ccp1=null;
     final int REQUEST_CAMERA = 1;
     final int SELECT_FILE = 2;
     final CharSequence[] items = {"Take Photo", "Choose From Gallery"};
@@ -74,15 +65,16 @@ public class RegistrationOrganizationActivity extends AppCompatActivity implemen
     private Uri selectedImageUri;
     private NetworkOrganizationImpl noi;
     public String base64Photo="";
+    String FilePathStr="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_organization);
+        this.ccp1=findViewById(R.id.ccp1);
         this.iv=findViewById(R.id.imageButton);
         this.t1=findViewById(R.id.t1);
         this.t2=findViewById(R.id.t2);
-        this.t3=findViewById(R.id.t3);
         this.t4=findViewById(R.id.t4);
         this.t5=findViewById(R.id.t5);
         this.t6=findViewById(R.id.t6);
@@ -90,7 +82,6 @@ public class RegistrationOrganizationActivity extends AppCompatActivity implemen
         this.t8=findViewById(R.id.t8);
         this.t9=findViewById(R.id.t9);
         this.t10=findViewById(R.id.t10);
-
         noi = new NetworkOrganizationImpl();
 
 
@@ -142,12 +133,13 @@ public class RegistrationOrganizationActivity extends AppCompatActivity implemen
             case SELECT_FILE:
                 if(resultCode == -1){
                     try{
+
                         Uri imageUri = imageReturnedIntent.getData();
                         iv.setImageURI(null);
                         iv.setImageURI(imageUri);
+                        selectedImageUri = imageReturnedIntent.getData();
                         break;
                     }catch(Exception e){}
-
                 }
                 break;
         }
@@ -163,7 +155,7 @@ public class RegistrationOrganizationActivity extends AppCompatActivity implemen
                     final List<Event> evs=new ArrayList<>();
                     Organization o= new Organization( t1.getEditText().getText().toString(),
                             t2.getEditText().getText().toString(),
-                            t3.getEditText().getText().toString(),
+                            ccp1.getSelectedCountryEnglishName(),
                             t4.getEditText().getText().toString(),
                             t6.getEditText().getText().toString(), t8.getEditText().getText().toString(),
                             new RolUser(t7.getEditText().getText().toString(),new Roles(1,"Organization")),
@@ -174,6 +166,7 @@ public class RegistrationOrganizationActivity extends AppCompatActivity implemen
                     noi.createOrganization(o,new RequestCallback<Organization>() {
                         @Override
                         public void onSuccess(final Organization response) {
+
 
                             //create a new file
                             File imageFile = null;
@@ -213,7 +206,8 @@ public class RegistrationOrganizationActivity extends AppCompatActivity implemen
 
                         @Override
                         public void onFailed(NetworkException e) {
-                            Toast.makeText(applicationContext,"Error in the registration,please try again!!!!",Toast.LENGTH_SHORT).show();
+                            System.out.println("no funciona");
+                            //Toast.makeText(applicationContext,"Error in the registration,please try again!!!!",Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -232,11 +226,13 @@ public class RegistrationOrganizationActivity extends AppCompatActivity implemen
                     int permission = ActivityCompat.checkSelfPermission(applicationContext, Manifest.permission.CAMERA);
                     if(permission != PackageManager.PERMISSION_GRANTED){
                         Toast.makeText(applicationContext,"You have to grant permissions, intent again!!",Toast.LENGTH_SHORT).show();
+                        grantPermissions();
                     }
                     else{
                         int permission2 = ActivityCompat.checkSelfPermission(applicationContext, Manifest.permission.READ_EXTERNAL_STORAGE);
                         if(permission2 != PackageManager.PERMISSION_GRANTED){
                             Toast.makeText(applicationContext,"You have to grant permissions, intent again!!",Toast.LENGTH_SHORT).show();
+                            grantPermissions();
                         }else{
                             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                             File photo = new File(Environment.getExternalStorageDirectory(),"Pic.jpg");
@@ -287,13 +283,12 @@ public class RegistrationOrganizationActivity extends AppCompatActivity implemen
     public boolean validation(){
 
         if(t1.getEditText().getText().toString().length()==0 ||
-        t2.getEditText().getText().toString().length()==0 ||
-        t3.getEditText().getText().toString().length()==0 ||
-        t4.getEditText().getText().toString().length()==0 ||
-        t5.getEditText().getText().toString().length()==0 ||
-        t6.getEditText().getText().toString().length()==0 ||
-        t7.getEditText().getText().toString().length()==0 ||
-        t8.getEditText().getText().toString().length()==0 ||
+                t2.getEditText().getText().toString().length()==0 ||
+                t4.getEditText().getText().toString().length()==0 ||
+                t5.getEditText().getText().toString().length()==0 ||
+                t6.getEditText().getText().toString().length()==0 ||
+                t7.getEditText().getText().toString().length()==0 ||
+                t8.getEditText().getText().toString().length()==0 ||
                 t9.getEditText().getText().toString().length()==0 ||
                 iv.getDrawable()==null || (!t9.getEditText().getText().toString().equals(t10.getEditText().getText().toString())) ){
             Toast.makeText(this,"Please complete all inputs and select an image",Toast.LENGTH_SHORT).show();
@@ -318,7 +313,6 @@ public class RegistrationOrganizationActivity extends AppCompatActivity implemen
     public void onClick(View v) {
 
     }
-
 
 
 
