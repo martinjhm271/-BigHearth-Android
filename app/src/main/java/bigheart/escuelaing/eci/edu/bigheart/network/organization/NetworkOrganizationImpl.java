@@ -43,6 +43,7 @@ public class NetworkOrganizationImpl implements NetworkOrganization {
                     requestCallback.onSuccess( execute.body() );
                 }
                 catch ( Exception e ) {
+                    System.out.println(e.getMessage());
                     requestCallback.onFailed( new NetworkException( null, e ) );
                 }
             }
@@ -71,7 +72,23 @@ public class NetworkOrganizationImpl implements NetworkOrganization {
     }
 
     @Override
-    public void setOrganizationImage(String email, Part m, RequestCallback<Organization> requestCallback) {
+    public void setOrganizationImage(final String email, final Part m, final RequestCallback<Organization> requestCallback) {
+
+        backgroundExecutor.execute( new Runnable() {
+            @Override
+            public void run() {
+                Call<Organization> call = nso.setOrganizationImage(email,m);
+                try {
+                    Response<Organization> execute =call.execute();
+                    requestCallback.onSuccess( execute.body() );
+                }
+                catch ( Exception e ) {
+                    System.out.println(e.getMessage());
+                    System.out.println(e.getStackTrace());
+                    requestCallback.onFailed( new NetworkException( null, e ) );
+                }
+            }
+        } );
 
     }
 

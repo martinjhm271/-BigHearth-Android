@@ -21,19 +21,19 @@ public interface NetworkServiceVolunteer {
     Call<Volunteer> createVolunteer(@Body Volunteer v);
 
     @GET("volunteer/{email}")
-    Call<Volunteer> getVolunteerByEmail(@Path("email") String email, RequestCallback<Volunteer> requestCallback);
+    Call<Volunteer> getVolunteerByEmail(@Path("email") String email);
 
     @GET ("volunteer/{email}/events")
-    Call<Event[]> getEvents(@Path("email") String email, RequestCallback<Event[]> requestCallback);
+    Call<Event[]> getEvents(@Path("email") String email);
 
     @POST( "volunteer/modifyProfileVol" )
-    Call<Volunteer> updateVolunteer(@Body Volunteer v, RequestCallback<Volunteer> requestCallback);
+    Call<Volunteer> updateVolunteer(@Body Volunteer v);
 
     @Multipart
     @POST( "volunteer/{email}/image/upload" )
-    void setVolunteerImage(@Path("email") String email, @Part MultipartBody.Part m, RequestCallback<Volunteer> requestCallback);
+    Call<Volunteer> setVolunteerImage(@Path("email") String email, @Part MultipartBody.Part m);
 
     @GET ("volunteer/{email}/image")
-    void getVolunteerImage(@Path("email") String email, RequestCallback<Volunteer> requestCallback);
+    void getVolunteerImage(@Path("email") String email);
 
 }

@@ -29,7 +29,7 @@ public class Organization implements java.io.Serializable{
     private RolUser mail;
 
 
-    private byte[] photo;
+    private String photo;
 
 
     private String password;
@@ -46,7 +46,7 @@ public class Organization implements java.io.Serializable{
     public Organization() {
     }
 
-    public Organization(String commercialName, String businessName, String state, String city, String address, String description, RolUser mail, byte[] photo, String password, int nit, int volunteersMade, List<Event> myEvents) {
+    public Organization(String commercialName, String businessName, String state, String city, String address, String description, RolUser mail, String photo, String password, int nit, int volunteersMade, List<Event> myEvents) {
         this.commercialName = commercialName;
         this.businessName = businessName;
         this.state = state;
@@ -117,11 +117,11 @@ public class Organization implements java.io.Serializable{
         this.mail = mail;
     }
 
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 

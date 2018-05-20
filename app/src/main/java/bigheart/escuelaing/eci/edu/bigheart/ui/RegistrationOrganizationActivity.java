@@ -167,7 +167,6 @@ public class RegistrationOrganizationActivity extends AppCompatActivity implemen
                         @Override
                         public void onSuccess(final Organization response) {
 
-
                             //create a new file
                             File imageFile = null;
                             MultipartBody.Part body=null;
@@ -189,16 +188,28 @@ public class RegistrationOrganizationActivity extends AppCompatActivity implemen
                                 e.printStackTrace();
                             }
 
-                            noi.setOrganizationImage(response.getMail().getMail(),body,new RequestCallback<Organization>() {
+                            noi.setOrganizationImage(t7.getEditText().getText().toString(),body,new RequestCallback<Organization>() {
                                         @Override
                                         public void onSuccess(final Organization response) {
-                                            Toast.makeText(applicationContext,"Registration success!!!!",Toast.LENGTH_SHORT).show();
-                                            //falta iniciar la actividad del login de carlos
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Toast.makeText(applicationContext,"Registration success!!!!",Toast.LENGTH_SHORT).show();
+                                                    //falta iniciar la actividad del login de carlos
+                                                }
+                                            });
+
                                         }
 
                                         @Override
                                         public void onFailed(NetworkException e) {
-                                            Toast.makeText(applicationContext,"Error uploading photo,please try again!!!!",Toast.LENGTH_SHORT).show();
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Toast.makeText(applicationContext,"Error uploading photo,please try again!!!!",Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+
                                         }
                                     }
                                     );
@@ -206,8 +217,13 @@ public class RegistrationOrganizationActivity extends AppCompatActivity implemen
 
                         @Override
                         public void onFailed(NetworkException e) {
-                            System.out.println("no funciona");
-                            //Toast.makeText(applicationContext,"Error in the registration,please try again!!!!",Toast.LENGTH_SHORT).show();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(applicationContext,"Error in the registration,please try again!!!!",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
                         }
                     });
 

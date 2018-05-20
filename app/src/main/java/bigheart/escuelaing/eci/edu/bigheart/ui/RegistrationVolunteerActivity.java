@@ -212,16 +212,28 @@ public class RegistrationVolunteerActivity extends AppCompatActivity implements 
                                 e.printStackTrace();
                             }
 
-                            nvi.setVolunteerImage(response.getMail().getMail(),body,new RequestCallback<Volunteer>() {
+                            nvi.setVolunteerImage(t18.getEditText().getText().toString(),body,new RequestCallback<Volunteer>() {
                                         @Override
                                         public void onSuccess(final Volunteer response) {
-                                            Toast.makeText(applicationContext,"Registration success!!!!",Toast.LENGTH_SHORT).show();
-                                            //falta iniciar la actividad del login de carlos
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Toast.makeText(applicationContext,"Registration success!!!!",Toast.LENGTH_SHORT).show();
+                                                    //falta iniciar la actividad del login de carlos
+                                                }
+                                            });
+
                                         }
 
                                         @Override
                                         public void onFailed(NetworkException e) {
-                                            Toast.makeText(applicationContext,"Error uploading photo,please try again!!!!",Toast.LENGTH_SHORT).show();
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Toast.makeText(applicationContext,"Error uploading photo,please try again!!!!",Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+
                                         }
                                     }
                             );
@@ -229,7 +241,12 @@ public class RegistrationVolunteerActivity extends AppCompatActivity implements 
 
                         @Override
                         public void onFailed(NetworkException e) {
-                            Toast.makeText(applicationContext,"Error in the registration,please try again!!!!",Toast.LENGTH_SHORT).show();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(applicationContext,"Error in the registration,please try again!!!!",Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
                     });
 

@@ -77,7 +77,21 @@ public class NetworkVolunteerImpl implements NetworkVolunteer {
     }
 
     @Override
-    public void setVolunteerImage(String email, Part m, RequestCallback<Volunteer> requestCallback) {
+    public void setVolunteerImage(final String email, final Part m, final RequestCallback<Volunteer> requestCallback) {
+
+        backgroundExecutor.execute( new Runnable() {
+            @Override
+            public void run() {
+                Call<Volunteer> call = nsv.setVolunteerImage(email,m);
+                try {
+                    Response<Volunteer> execute =call.execute();
+                    requestCallback.onSuccess( execute.body() );
+                }
+                catch ( Exception e ) {
+                    requestCallback.onFailed( new NetworkException( null, e ) );
+                }
+            }
+        } );
 
     }
 
