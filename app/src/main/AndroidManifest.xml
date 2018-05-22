@@ -13,7 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity">
+        <activity
+            android:name=".ui.Login"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,6 +26,9 @@
         </activity>
         <activity android:name=".ui.RegistrationVolunteerActivity" />
         <activity android:name=".ui.RegistrationOrganizationActivity"></activity>
+
+        <activity android:name=".ui.EventList"></activity>
+
     </application>
 
 </manifest>
