@@ -13,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.RegistrationVolunteerActivity" />
+        <activity android:name=".ui.RegistrationOrganizationActivity" />
+        <activity android:name=".ui.SingUpActivity" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,8 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.RegistrationVolunteerActivity" />
-        <activity android:name=".ui.RegistrationOrganizationActivity"></activity>
     </application>
 
 </manifest>

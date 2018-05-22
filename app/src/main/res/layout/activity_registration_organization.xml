@@ -149,12 +149,14 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/t9"
                 android:layout_width="192dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                >
 
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password" />
+                    android:hint="Password"
+                    android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -165,7 +167,8 @@
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Confirm" />
+                    android:hint="Confirm"
+                    android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
