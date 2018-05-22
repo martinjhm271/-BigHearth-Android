@@ -233,7 +233,6 @@ public class RegistrationOrganizationActivity extends AppCompatActivity implemen
     }
 
     public void photo(){
-
         DialogInterface.OnClickListener optionSelectedListener =new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
