@@ -16,6 +16,7 @@ import bigheart.escuelaing.eci.edu.bigheart.network.service.NetworkServiceLogin;
 import bigheart.escuelaing.eci.edu.bigheart.network.service.NetworkServiceOrganization;
 import bigheart.escuelaing.eci.edu.bigheart.network.service.RequestCallback;
 import okhttp3.Interceptor;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Call;
@@ -65,4 +66,46 @@ public class NetworkEventImpl implements NetworkEvent {
             }
         } );
     }
+
+
+    @Override
+    public void getEventById(final String idEvent, final RequestCallback<Event> requestCallback) {
+        backgroundExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                Call<Event> call = nse.getEventById(idEvent);
+                try {
+                    Response<Event> execute =call.execute();
+                    requestCallback.onSuccess(execute.body());
+                }
+                catch ( Exception e ) {
+                    System.out.println(e.getMessage());
+                    requestCallback.onFailed( new NetworkException( null, e ) );
+                }
+            }
+        } );
+    }
+
+    @Override
+    public void setEventImage(final String eventId, final MultipartBody.Part m, final RequestCallback<Event> requestCallback) {
+
+        backgroundExecutor.execute( new Runnable() {
+            @Override
+            public void run() {
+                Call<Event> call = nse.setEventImage(eventId,m);
+                try {
+                    Response<Event> execute =call.execute();
+                    requestCallback.onSuccess( execute.body() );
+                }
+                catch ( Exception e ) {
+                    System.out.println(e.getMessage());
+                    System.out.println(e.getStackTrace());
+                    requestCallback.onFailed( new NetworkException( null, e ) );
+                }
+            }
+        } );
+
+    }
+
+
 }

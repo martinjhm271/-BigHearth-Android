@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -186,7 +187,8 @@ public class NewEventActivity extends AppCompatActivity implements OnMapReadyCal
                 saveEventRED();
             }
         });
-
+        grantPermissions();
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder(); StrictMode.setVmPolicy(builder.build());
     }
 
     private void saveEventRED() {
@@ -209,6 +211,9 @@ public class NewEventActivity extends AppCompatActivity implements OnMapReadyCal
                             final List<Volunteer> volts=new ArrayList<>();
                             final List<Review> reviews=new ArrayList<>();
                             final List<Requirement> requirements=new ArrayList<>();
+                            System.out.println(volunteers.getText().toString());
+                            System.out.println(latitudes.getEditText().getText().toString());
+                            System.out.println(longitudes.getEditText().getText().toString());
                             final Event event= new Event(0,Integer.parseInt(volunteers.getText().toString()),types.getText().toString(),description.getText().toString(),fecha,null,volts,response,reviews,requirements,Double.parseDouble(latitudes.getEditText().getText().toString()),Double.parseDouble(longitudes.getEditText().getText().toString()),name.getText().toString(),0);
                             networkEvent.createEvent(event, NIT[0], new RequestCallback<Event>() {
                                 @Override
@@ -234,14 +239,14 @@ public class NewEventActivity extends AppCompatActivity implements OnMapReadyCal
                                         e.printStackTrace();
                                     }
 
-                                    networkOrganization.setOrganizationImage(emailOrganization,body,new RequestCallback<Organization>() {
+                                    networkEvent.setEventImage(Integer.toString(response.getId()),body,new RequestCallback<Event>() {
                                                 @Override
-                                                public void onSuccess(final Organization response) {
+                                                public void onSuccess(final Event response) {
                                                     runOnUiThread(new Runnable() {
                                                         @Override
                                                         public void run() {
                                                             Toast.makeText(context,"Registration success!!!!",Toast.LENGTH_SHORT).show();
-                                                            //falta iniciar la actividad del login de carlos
+                                                            finish();
                                                         }
                                                     });
 

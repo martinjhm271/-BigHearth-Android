@@ -1,10 +1,12 @@
 package bigheart.escuelaing.eci.edu.bigheart.ui;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -63,15 +65,32 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 nli.login(new Credentials(email,password), new RequestCallback<Token>(){
                             @Override
                             public void onSuccess(final Token response) {
-                                ed.putString(USER_KEY,edtEmail.getText().toString());
-                                ed.putString(USER_ROL_KEY,response.getRol());
-                                ed.putString(TOKEN_KEY,response.getAccessToken());
-                                ed.commit();
+                                if(response!=null){
+                                    ed.putString(USER_KEY,edtEmail.getText().toString());
+                                    ed.putString(USER_ROL_KEY,response.getRol());
+                                    ed.putString(TOKEN_KEY,response.getAccessToken());
+                                    ed.commit();
+                                    Intent intent = new Intent(c,MainActivity.class);
+                                    startActivity(intent);
+                                }
+                                else{
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            AlertDialog alertDialog = new AlertDialog.Builder(c).create();
+                                            alertDialog.setTitle("Alert");
+                                            alertDialog.setMessage("Invalid credentials!! , Try again!!!");
+                                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",     new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.dismiss();
+                                                }
+                                            });
+                                            alertDialog.show();
+                                        }
+                                    });
 
-                                Intent intent = new Intent(c,MainActivity.class);
-                                startActivity(intent);
+                                }
                             }
-
                             @Override
                             public void onFailed(NetworkException e) {
                                 runOnUiThread(new Runnable() {

@@ -20,6 +20,7 @@ import java.util.List;
 
 import bigheart.escuelaing.eci.edu.bigheart.R;
 import bigheart.escuelaing.eci.edu.bigheart.model.Event;
+import bigheart.escuelaing.eci.edu.bigheart.ui.EventDetailActivity;
 import bigheart.escuelaing.eci.edu.bigheart.ui.EventList;
 import bigheart.escuelaing.eci.edu.bigheart.ui.Login;
 
@@ -64,7 +65,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull final EventAdapter.ViewHolder holder,final int position) {
         holder.nameEvent.setText(events.get(position).getName());
         holder.description.setText(events.get(position).getDescription());
-        holder.dateEvent.setText(events.get(position).getDateFormat());
+        holder.dateEvent.setText(events.get(position).getEventDate());
         holder.companyName.setText(events.get(position).getEventType());
 
         byte[] decodeString = android.util.Base64.decode(events.get(position).getImage(), android.util.Base64.DEFAULT);
@@ -76,12 +77,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             @Override
             public void onClick(View v){
                 if(v.getId() == holder.btnViewImage.getId()){
-                    /*
-                    * CRISTIANNNNN AQUIII ESSSSSS
-                    * */
-                    //Intent intent = new Intent(v.getContext(),EventDetailView.class);
-                    //intent.putExtra("EventDetail", events.get(position).getId());
-                    //v.getContext().startActivity(intent);
+
+                    Intent intent = new Intent(v.getContext(),EventDetailActivity.class);
+                    intent.putExtra("EventDetail", Integer.toString(events.get(position).getId()));
+                    v.getContext().startActivity(intent);
                 }
             }
         });

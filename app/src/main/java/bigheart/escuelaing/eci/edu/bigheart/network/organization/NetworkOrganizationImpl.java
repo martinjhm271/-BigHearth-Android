@@ -2,6 +2,7 @@ package bigheart.escuelaing.eci.edu.bigheart.network.organization;
 
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -75,7 +76,7 @@ public class NetworkOrganizationImpl implements NetworkOrganization {
     }
 
     @Override
-    public void getEvents(Integer NIT, RequestCallback<Event[]> requestCallback) {
+    public void getEvents(Integer NIT, RequestCallback<List<Event>> requestCallback) {
 
     }
 

@@ -10,6 +10,9 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import okhttp3.MultipartBody;
+import retrofit2.http.Part;
+import retrofit2.http.Multipart;
 
 
 public interface NetworkServiceEvent {
@@ -19,5 +22,12 @@ public interface NetworkServiceEvent {
 
     @GET(" event/AllEvent ")
     Call<List<Event>> getAllEvents();
+    
+    @GET("event/{idEvent}")
+    Call<Event> getEventById(@Path("idEvent") String idEvent);
+
+    @Multipart
+    @POST( "event/{eventId}/image/upload" )
+    Call<Event> setEventImage(@Path("eventId") String eventId,@Part MultipartBody.Part m);
 
 }
