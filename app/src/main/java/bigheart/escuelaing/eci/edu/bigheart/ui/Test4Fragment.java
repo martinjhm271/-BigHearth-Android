@@ -80,14 +80,14 @@ public class Test4Fragment extends Fragment {
         sharedPref= applicationContext.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         nvi = new NetworkVolunteerImpl();
         this.ib=v.findViewById(R.id.imageButton5);
-        this.name=v.findViewById(R.id.name);
-        this.lastname=v.findViewById(R.id.lastname);
-        this.gender=v.findViewById(R.id.gender);
-        this.born=v.findViewById(R.id.born);
+        this.name=v.findViewById(R.id.name1);
+        this.lastname=v.findViewById(R.id.lastname1);
+        this.gender=v.findViewById(R.id.gender1);
+        this.born=v.findViewById(R.id.born1);
         this.country=v.findViewById(R.id.country4);
-        this.city=v.findViewById(R.id.city);
-        this.address=v.findViewById(R.id.address);
-        this.email=v.findViewById(R.id.email);
+        this.city=v.findViewById(R.id.city1);
+        this.address=v.findViewById(R.id.address1);
+        this.email=v.findViewById(R.id.email1);
 
         final String mail = sharedPref.getString(VOLUNTEER_KEY,"None");
 

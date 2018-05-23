@@ -32,6 +32,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
+                android:layout_gravity="center"
                 />
 
         </LinearLayout>
@@ -42,7 +43,7 @@
             android:orientation="horizontal">
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/name"
+                android:id="@+id/name1"
                 android:layout_width="192dp"
                 android:layout_height="50dp">
 
@@ -52,7 +53,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/lastname"
+                android:id="@+id/lastname1"
                 android:layout_width="192dp"
                 android:layout_height="50dp">
 
@@ -68,7 +69,7 @@
             android:orientation="horizontal">
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/gender"
+                android:id="@+id/gender1"
                 android:layout_width="192dp"
                 android:layout_height="50dp">
 
@@ -78,7 +79,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/born"
+                android:id="@+id/born1"
                 android:layout_width="192dp"
                 android:layout_height="50dp">
 
@@ -103,7 +104,7 @@
                 app:ccp_showNameCode="false"/>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/city"
+                android:id="@+id/city1"
                 android:layout_width="192dp"
                 android:layout_height="50dp">
 
@@ -121,7 +122,7 @@
             android:orientation="horizontal">
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/address"
+                android:id="@+id/address1"
                 android:layout_width="192dp"
                 android:layout_height="50dp">
 
@@ -132,7 +133,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/email"
+                android:id="@+id/email1"
                 android:layout_width="192dp"
                 android:layout_height="50dp">
 
