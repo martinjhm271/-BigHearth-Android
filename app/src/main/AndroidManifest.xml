@@ -17,7 +17,6 @@
             android:name=".ui.Login"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,10 +24,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.RegistrationVolunteerActivity" />
-        <activity android:name=".ui.RegistrationOrganizationActivity"></activity>
-
-        <activity android:name=".ui.EventList"></activity>
-
+        <activity android:name=".ui.RegistrationOrganizationActivity" />
+        <activity android:name=".ui.EventList" />
+        <activity android:name=".ui.VolunteerEvents"></activity>
     </application>
 
 </manifest>

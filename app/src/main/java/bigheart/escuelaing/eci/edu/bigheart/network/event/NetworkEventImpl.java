@@ -25,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkEventImpl implements NetworkEvent {
 
-    private static final String BASE_URL = "http://104.211.17.72:8080/";
+    private static final String BASE_URL = "http://104.211.48.12:8080/";
     private NetworkServiceEvent nse;
     private ExecutorService backgroundExecutor = Executors.newFixedThreadPool( 1 );
 
