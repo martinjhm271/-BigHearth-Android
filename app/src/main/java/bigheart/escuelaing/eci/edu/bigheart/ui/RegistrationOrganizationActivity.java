@@ -56,7 +56,7 @@ import retrofit2.http.Multipart;
 
 public class RegistrationOrganizationActivity extends AppCompatActivity implements View.OnClickListener{
 
-    TextInputLayout t10,t1,t2,t4,t5,t6,t7,t8,t9= null;
+    TextInputLayout t10,t1,t2,t4,t5,t6,t7,t8,t9 = null;
     ImageButton iv=null;
     CountryCodePicker ccp1=null;
     final int REQUEST_CAMERA = 1;
@@ -197,7 +197,8 @@ public class RegistrationOrganizationActivity extends AppCompatActivity implemen
                                                 @Override
                                                 public void run() {
                                                     Toast.makeText(applicationContext,"Registration success!!!!",Toast.LENGTH_SHORT).show();
-                                                    //falta iniciar la actividad del login de carlos
+                                                    Intent intent = new Intent(applicationContext,Login.class);
+                                                    startActivity(intent);
                                                 }
                                             });
 

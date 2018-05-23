@@ -2,6 +2,7 @@ package bigheart.escuelaing.eci.edu.bigheart.network.volunteer;
 
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -62,8 +63,21 @@ public class NetworkVolunteerImpl implements NetworkVolunteer {
     }
 
     @Override
-    public void getEvents(String email, RequestCallback<Event[]> requestCallback) {
-
+    public void getEvents(final String email, final RequestCallback<List<Event>> requestCallback) {
+        backgroundExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                Call<List<Event>> call = nsv.getEvents(email);
+                try {
+                    Response<List<Event>> execute =call.execute();
+                    requestCallback.onSuccess(execute.body());
+                }
+                catch ( Exception e ) {
+                    System.out.println(e.getMessage());
+                    requestCallback.onFailed( new NetworkException( null, e ) );
+                }
+            }
+        } );
     }
 
     @Override

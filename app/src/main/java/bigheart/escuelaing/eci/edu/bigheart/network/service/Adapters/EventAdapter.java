@@ -54,14 +54,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     }
 
     @Override
-    public EventAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public EventAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,  int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_card,parent,false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final EventAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final EventAdapter.ViewHolder holder,final int position) {
         holder.nameEvent.setText(events.get(position).getName());
         holder.description.setText(events.get(position).getDescription());
         holder.dateEvent.setText(events.get(position).getDateFormat());
@@ -76,8 +76,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             @Override
             public void onClick(View v){
                 if(v.getId() == holder.btnViewImage.getId()){
-                    Intent intent = new Intent(v.getContext(),Login.class);
-                    v.getContext().startActivity(intent);
+                    /*
+                    * CRISTIANNNNN AQUIII ESSSSSS
+                    * */
+                    //Intent intent = new Intent(v.getContext(),EventDetailView.class);
+                    //intent.putExtra("EventDetail", events.get(position).getId());
+                    //v.getContext().startActivity(intent);
                 }
             }
         });

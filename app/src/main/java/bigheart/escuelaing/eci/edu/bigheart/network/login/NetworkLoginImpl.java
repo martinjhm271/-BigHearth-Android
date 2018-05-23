@@ -1,6 +1,7 @@
 package bigheart.escuelaing.eci.edu.bigheart.network.login;
 
 
+import bigheart.escuelaing.eci.edu.bigheart.model.Credentials;
 import bigheart.escuelaing.eci.edu.bigheart.network.service.NetworkException;
 import bigheart.escuelaing.eci.edu.bigheart.network.service.NetworkServiceLogin;
 import bigheart.escuelaing.eci.edu.bigheart.network.service.RequestCallback;
@@ -28,7 +29,7 @@ public class NetworkLoginImpl implements NetworkLogin {
     }
 
     @Override
-    public void login(final LoginWrapper loginWrapper, final RequestCallback<Token> requestCallback ) {
+    public void login(final Credentials loginWrapper, final RequestCallback<Token> requestCallback ) {
         backgroundExecutor.execute( new Runnable() {
             @Override
             public void run() {

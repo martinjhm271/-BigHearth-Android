@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     private Toolbar toolbar;
     Context c =this;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +37,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         initNavigationDrawer();
-        Intent intent = new Intent(c, SingUpActivity.class);
-        startActivity(intent);
     }
 
 

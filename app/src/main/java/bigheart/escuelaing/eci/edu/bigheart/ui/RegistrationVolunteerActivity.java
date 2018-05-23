@@ -253,7 +253,8 @@ public class RegistrationVolunteerActivity extends AppCompatActivity implements 
                                                 @Override
                                                 public void run() {
                                                     Toast.makeText(applicationContext,"Registration success!!!!",Toast.LENGTH_SHORT).show();
-                                                    //falta iniciar la actividad del login de carlos
+                                                    Intent intent = new Intent(applicationContext,Login.class);
+                                                    startActivity(intent);
                                                 }
                                             });
 

@@ -1,5 +1,7 @@
 package bigheart.escuelaing.eci.edu.bigheart.network.service;
 
+import java.util.List;
+
 import bigheart.escuelaing.eci.edu.bigheart.model.Event;
 
 import bigheart.escuelaing.eci.edu.bigheart.model.Volunteer;
@@ -24,7 +26,7 @@ public interface NetworkServiceVolunteer {
     Call<Volunteer> getVolunteerByEmail(@Path("email") String email);
 
     @GET ("volunteer/{email}/events")
-    Call<Event[]> getEvents(@Path("email") String email);
+    Call<List<Event>> getEvents(@Path("email") String email);
 
     @POST( "volunteer/modifyProfileVol" )
     Call<Volunteer> updateVolunteer(@Body Volunteer v);
