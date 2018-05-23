@@ -2,6 +2,7 @@ package bigheart.escuelaing.eci.edu.bigheart.model;
 
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class Volunteer  implements Serializable {
     private String gender;
 
 
-    private Date bornDate;
+    private String bornDate;
 
 
     private int hours;
@@ -59,7 +60,7 @@ public class Volunteer  implements Serializable {
     }
 
 
-    public Volunteer(Integer vol_id, String name, String lastname, String gender, Date bornDate, int hours, String state, String city, String address, String description, int volunteerMade, String photo, RolUser mail, String password, String volInterest, List<Event> myEvents) {
+    public Volunteer(Integer vol_id, String name, String lastname, String gender, String bornDate, int hours, String state, String city, String address, String description, int volunteerMade, String photo, RolUser mail, String password, String volInterest, List<Event> myEvents) {
         this.vol_id = vol_id;
         this.name = name;
         this.lastname = lastname;
@@ -110,11 +111,11 @@ public class Volunteer  implements Serializable {
         this.gender = gender;
     }
 
-    public Date getBornDate() {
+    public String getBornDate() {
         return bornDate;
     }
 
-    public void setBornDate(Date bornDate) {
+    public void setBornDate(String bornDate) {
         this.bornDate = bornDate;
     }
 

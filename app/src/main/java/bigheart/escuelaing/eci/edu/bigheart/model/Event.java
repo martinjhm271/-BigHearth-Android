@@ -3,6 +3,7 @@ package bigheart.escuelaing.eci.edu.bigheart.model;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class Event  implements Serializable{
     private int numberVolunteers;
     private String eventType;
     private String description;
-    private Date eventDate;
+    private String eventDate;
     private String image;
     private List<Volunteer> volunteers=new ArrayList<>();
     private Organization organization;
@@ -31,7 +32,7 @@ public class Event  implements Serializable{
     }
 
 
-    public Event(int id, int maxVolunteers, String eventType, String description, Date eventDate,String image, List<Volunteer> volunteers, Organization organization, List<Review> reviews, List<Requirement> requirements,Double latitude, Double longitude,String name, int numberVolunteers){
+    public Event(int id, int maxVolunteers, String eventType, String description, String eventDate,String image, List<Volunteer> volunteers, Organization organization, List<Review> reviews, List<Requirement> requirements,Double latitude, Double longitude,String name, int numberVolunteers){
         this.id = id;
         this.maxVolunteers = maxVolunteers;
         this.eventType = eventType;
@@ -68,11 +69,11 @@ public class Event  implements Serializable{
     }
 
 
-    public Date getEventDate() {
+    public String getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(Date eventDate) {
+    public void setEventDate(String eventDate) {
         this.eventDate = eventDate;
     }
 

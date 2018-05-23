@@ -2,6 +2,7 @@ package bigheart.escuelaing.eci.edu.bigheart.ui;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,6 +27,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -37,9 +39,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -70,6 +74,11 @@ public class RegistrationVolunteerActivity extends AppCompatActivity implements 
     CountryCodePicker ccp2=null;
     Spinner spinner2 = null;
     String selectSpinner2="";
+    Button b;
+    DatePickerDialog datePickerDialog;
+    int year, month, dayOfMonth;
+    Calendar calendar;
+    String fecha="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,8 +101,8 @@ public class RegistrationVolunteerActivity extends AppCompatActivity implements 
         this.iv=findViewById(R.id.imageButton2);
         this.t11=findViewById(R.id.t11);
         this.t12=findViewById(R.id.t12);
-
-        this.t14=findViewById(R.id.t14);
+        this.b=findViewById(R.id.btndate);
+        //this.t14=findViewById(R.id.t14);
         this.t16=findViewById(R.id.t16);
         this.t17=findViewById(R.id.t17);
         this.t18=findViewById(R.id.t18);
@@ -101,7 +110,12 @@ public class RegistrationVolunteerActivity extends AppCompatActivity implements 
         this.t20=findViewById(R.id.t20);
         nvi = new NetworkVolunteerImpl();
 
-
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePicker();
+            }
+        });
 
         final ImageButton button3 = findViewById(R.id.imageButton2);
         button3.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +134,26 @@ public class RegistrationVolunteerActivity extends AppCompatActivity implements 
         grantPermissions();
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder(); StrictMode.setVmPolicy(builder.build());
     }
+
+
+    private void showDatePicker() {
+        calendar= Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        dayOfMonth=calendar.get(Calendar.DAY_OF_MONTH);
+        datePickerDialog= new DatePickerDialog(applicationContext,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        String day1= String.valueOf(day),month1= String.valueOf(month);
+                        if(month<10){month1="0"+month;}
+                        if(day<10){day1="0"+day;}
+                        fecha=year+"-"+month1+"-"+day1;
+                    }
+                },year,month,dayOfMonth);
+        datePickerDialog.show();
+    }
+
 
     @NonNull
     public static Dialog createSingleChoiceAlertDialog(@NonNull Context context, @Nullable String title,
@@ -174,7 +208,7 @@ public class RegistrationVolunteerActivity extends AppCompatActivity implements 
                             t11.getEditText().getText().toString(),
                             t12.getEditText().getText().toString(),
                             selectSpinner2,
-                            new Date(t14.getText().toString()),
+                            fecha,
                             0,
                             ccp2.getSelectedCountryEnglishName(),
                             t16.getEditText().getText().toString(),
@@ -307,7 +341,7 @@ public class RegistrationVolunteerActivity extends AppCompatActivity implements 
 
     private File createImageFile() throws IOException {
         // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = this.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
@@ -323,8 +357,6 @@ public class RegistrationVolunteerActivity extends AppCompatActivity implements 
 
         if(t11.getEditText().getText().toString().length()==0 ||
                 t12.getEditText().getText().toString().length()==0 ||
-                t13.getEditText().getText().toString().length()==0 ||
-                t14.getText().toString().length()==0 ||
                 ccp2.getSelectedCountryEnglishName().length()==0 ||
                 t16.getEditText().getText().toString().length()==0 ||
                 t17.getEditText().getText().toString().length()==0 ||

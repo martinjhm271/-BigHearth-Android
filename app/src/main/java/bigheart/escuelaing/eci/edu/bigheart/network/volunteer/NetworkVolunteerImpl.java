@@ -23,7 +23,7 @@ import okhttp3.MultipartBody.Part;
 
 public class NetworkVolunteerImpl implements NetworkVolunteer {
 
-    private static final String BASE_URL = "https://bighearth.herokuapp.com/volunteer/";
+    private static final String BASE_URL = "http://104.211.48.12:8080/";
     private NetworkServiceVolunteer nsv;
     private ExecutorService backgroundExecutor = Executors.newFixedThreadPool( 1 );
 

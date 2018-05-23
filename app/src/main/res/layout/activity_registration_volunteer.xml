@@ -23,8 +23,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/round"
-            app:srcCompat="@android:drawable/ic_input_add"
             />
     </LinearLayout>
 
@@ -74,12 +72,19 @@
                 android:layout_width="192dp"
                 android:layout_height="match_parent" />
 
-            <EditText
+            <Button
+                android:id="@+id/btndate"
+                android:layout_width="192dp"
+                android:layout_height="match_parent"
+                android:text="Select Date"
+                android:textSize="14sp" />
+
+            <!--<EditText
                 android:id="@+id/t14"
                 android:layout_width="192dp"
                 android:layout_height="wrap_content"
                 android:hint="Born Data"
-                android:inputType="date" />
+                android:inputType="date" />-->
 
         </LinearLayout>
 
@@ -99,11 +104,11 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/t16"
                 android:layout_width="192dp"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:hint="City" />
 
             </android.support.design.widget.TextInputLayout>

@@ -105,6 +105,7 @@ public class NewEventActivity extends AppCompatActivity implements OnMapReadyCal
     int year, month, dayOfMonth;
     Calendar calendar;
     Context context=this;
+    String fecha="";
 
 
     byte[] byteArray;
@@ -208,7 +209,7 @@ public class NewEventActivity extends AppCompatActivity implements OnMapReadyCal
                             final List<Volunteer> volts=new ArrayList<>();
                             final List<Review> reviews=new ArrayList<>();
                             final List<Requirement> requirements=new ArrayList<>();
-                            final Event event= new Event(0,Integer.parseInt(volunteers.getText().toString()),types.getText().toString(),description.getText().toString(),new java.sql.Date(dateEvent.getTime()),null,volts,response,reviews,requirements,Double.parseDouble(latitudes.getEditText().getText().toString()),Double.parseDouble(longitudes.getEditText().getText().toString()),name.getText().toString(),0);
+                            final Event event= new Event(0,Integer.parseInt(volunteers.getText().toString()),types.getText().toString(),description.getText().toString(),fecha,null,volts,response,reviews,requirements,Double.parseDouble(latitudes.getEditText().getText().toString()),Double.parseDouble(longitudes.getEditText().getText().toString()),name.getText().toString(),0);
                             networkEvent.createEvent(event, NIT[0], new RequestCallback<Event>() {
                                 @Override
                                 public void onSuccess(final Event response) {
@@ -424,10 +425,10 @@ public class NewEventActivity extends AppCompatActivity implements OnMapReadyCal
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         date.setText(year + "-" + "0"+month + "-" +day );
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.set(year, month, day);
-
-                        dateEvent=calendar.getTime();
+                        String day1= String.valueOf(day),month1= String.valueOf(month);
+                        if(month<10){month1="0"+month;}
+                        if(day<10){day1="0"+day;}
+                        fecha=year+"-"+month1+"-"+day1;
 
 
                     }

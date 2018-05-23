@@ -21,7 +21,7 @@ import okhttp3.MultipartBody.Part;
 
 public class NetworkOrganizationImpl implements NetworkOrganization {
 
-    private static final String BASE_URL = "http://104.211.17.72:8080/";
+    private static final String BASE_URL = "http://104.211.48.12:8080/";
     private NetworkServiceOrganization nso;
     private ExecutorService backgroundExecutor = Executors.newFixedThreadPool( 1 );
 
