@@ -3,6 +3,7 @@ package bigheart.escuelaing.eci.edu.bigheart.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     Context c =this;
+    private final String USER_ROL_KEY = "USER_ROL_KEY";
+    SharedPreferences sharedPref;
+    Context context=this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         initNavigationDrawer();
+        sharedPref= context.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+
+
     }
 
 
@@ -54,8 +61,14 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                     showFragment(new Test2Fragment(), true);
                     return true;
                 case R.id.navigation_myprofile:
-                    showFragment(new Test3Fragment(), true);
-                    return true;
+                    final String userRol = sharedPref.getString(USER_ROL_KEY,"");
+                    if(userRol.equals("organization")){
+                        showFragment(new Test3Fragment(), true);
+                        return true;
+                    }else{
+                        showFragment(new Test4Fragment(), true);
+                        return true;
+                    }
             }
             return false;
         }

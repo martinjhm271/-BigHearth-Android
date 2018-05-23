@@ -107,5 +107,15 @@ public class NetworkEventImpl implements NetworkEvent {
 
     }
 
+    @Override
+    public void unrol(String eventId, String email, RequestCallback<Boolean> requestCallback) {
+
+    }
+
+    @Override
+    public void rol(String eventId, String email, RequestCallback<Boolean> requestCallback) {
+
+    }
+
 
 }

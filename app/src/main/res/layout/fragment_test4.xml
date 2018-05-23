@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Test3Fragment">
+    tools:context=".ui.Test4Fragment">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -31,29 +31,60 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@android:drawable/ic_input_add" />
-
-
         </LinearLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/commercialName"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/name"
+                android:layout_width="192dp"
+                android:layout_height="50dp">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/businessName"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/lastname"
+                android:layout_width="192dp"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/gender"
+                android:layout_width="192dp"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/born"
+                android:layout_width="192dp"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,6 +110,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     />
+
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
@@ -86,16 +118,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/NIT"
-                android:layout_width="192dp"
-                android:layout_height="50dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/address"
@@ -105,28 +127,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    />
+                     />
             </android.support.design.widget.TextInputLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/email"
-                android:layout_width="192dp"
-                android:layout_height="50dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/description"
                 android:layout_width="192dp"
                 android:layout_height="50dp">
 
