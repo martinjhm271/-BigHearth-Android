@@ -107,7 +107,7 @@ public class Test4Fragment extends Fragment {
                                     gender.getEditText().setText(response.getGender());
                                     SimpleDateFormat sdfr = new SimpleDateFormat("dd/MMM/yyyy");
                                     born.getEditText().setText(sdfr.format(response.getBornDate()));
-                                    country.setTransitionName(response.getState());
+                                    //country.setContentColor(response.getState());
                                     city.getEditText().setText(response.getCity());
                                     address.getEditText().setText(response.getAddress());
                                     email.getEditText().setText(response.getMail().getMail());
