@@ -19,7 +19,7 @@ public interface NetworkServiceOrganization {
     Call<Organization> createOrganization(@Body Organization o);
 
     @GET ("organization/{email}")
-    Call<Organization> getOrganizationByEmail(@Path("email") String email, RequestCallback<Organization> requestCallback);
+    Call<Organization> getOrganizationByEmail(@Path("email") String email);
 
     @GET ("organization/event/{id}")
     Call<Organization> getOrganizationByIdEvent(@Path("id") Integer id, RequestCallback<Organization> requestCallback);

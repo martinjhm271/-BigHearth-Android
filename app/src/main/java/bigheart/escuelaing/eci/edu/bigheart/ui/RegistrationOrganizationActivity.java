@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -74,6 +75,7 @@ public class RegistrationOrganizationActivity extends AppCompatActivity implemen
     private Uri selectedImageUri;
     private NetworkOrganizationImpl noi;
     public String base64Photo="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

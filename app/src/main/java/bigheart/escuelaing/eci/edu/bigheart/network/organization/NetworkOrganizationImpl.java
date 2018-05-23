@@ -21,7 +21,7 @@ import okhttp3.MultipartBody.Part;
 
 public class NetworkOrganizationImpl implements NetworkOrganization {
 
-    private static final String BASE_URL = "http://autenticationserver.herokuapp.com/";
+    private static final String BASE_URL = "http://104.211.17.72:8080/";
     private NetworkServiceOrganization nso;
     private ExecutorService backgroundExecutor = Executors.newFixedThreadPool( 1 );
 
@@ -51,7 +51,20 @@ public class NetworkOrganizationImpl implements NetworkOrganization {
     }
 
     @Override
-    public void getOrganizationByEmail(String email, RequestCallback<Organization> requestCallback) {
+    public void getOrganizationByEmail(final String email, final RequestCallback<Organization> requestCallback) {
+        backgroundExecutor.execute( new Runnable() {
+            @Override
+            public void run() {
+                Call<Organization> call = nso.getOrganizationByEmail(email);
+                try {
+                    Response<Organization> execute = call.execute();
+                    requestCallback.onSuccess( execute.body() );
+                }
+                catch ( IOException e ) {
+                    requestCallback.onFailed(new NetworkException(e.getMessage(), e));
+                }
+            }
+        } );
 
     }
 
