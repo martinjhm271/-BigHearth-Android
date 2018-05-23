@@ -9,12 +9,13 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 
 public interface NetworkServiceEvent {
 
-    @POST( "event" )
-    Call<Token> createEvent(@Body Event e);
+    @POST( "event/createEvent/{NIT}" )
+    Call<Event> createEvent(@Body Event e,@Path("NIT") int NIT);
 
     @GET(" event/AllEvent ")
     Call<List<Event>> getAllEvents();

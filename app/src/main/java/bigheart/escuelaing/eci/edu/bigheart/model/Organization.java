@@ -154,8 +154,5 @@ public class Organization implements java.io.Serializable{
 
     public void setMyEvents(List<Event> myEvents) { this.myEvents = myEvents; }
 
-    @Override
-    public String toString(){
-        return "[Organization -> commercialName: "+commercialName+", businessName: "+businessName+", state: "+state+", city: "+city+", address: "+address+", mail: "+mail.toString()+", password: "+password+", photo: "+photo+", NIT: "+Integer.toString(nit)+", volunteersMade: "+Integer.toString(volunteersMade)+"]";
-    }
+
 }

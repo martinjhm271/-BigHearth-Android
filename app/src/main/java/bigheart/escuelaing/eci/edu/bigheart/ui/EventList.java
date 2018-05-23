@@ -49,7 +49,6 @@ public class EventList extends AppCompatActivity {
             }
             @Override
             public void onFailed(NetworkException e) {
-
                 System.out.println(e.getMessage());
                 System.out.println("error");
             }

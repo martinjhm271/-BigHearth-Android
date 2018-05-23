@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkLoginImpl implements NetworkLogin {
 
-    private static final String BASE_URL = "https://bighearth.herokuapp.com/";
+    private static final String BASE_URL = "http://104.211.17.72:8080/";
 
     private NetworkServiceLogin nsl;
     private ExecutorService backgroundExecutor = Executors.newFixedThreadPool( 1 );

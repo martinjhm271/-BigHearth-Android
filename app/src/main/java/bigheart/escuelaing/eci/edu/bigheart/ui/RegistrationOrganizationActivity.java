@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -55,7 +56,7 @@ import retrofit2.http.Multipart;
 
 public class RegistrationOrganizationActivity extends AppCompatActivity implements View.OnClickListener{
 
-    TextInputLayout t10,t1,t2,t4,t5,t6,t7,t8,t9= null;
+    TextInputLayout t10,t1,t2,t4,t5,t6,t7,t8,t9 = null;
     ImageButton iv=null;
     CountryCodePicker ccp1=null;
     final int REQUEST_CAMERA = 1;
@@ -66,6 +67,7 @@ public class RegistrationOrganizationActivity extends AppCompatActivity implemen
     private NetworkOrganizationImpl noi;
     public String base64Photo="";
     String FilePathStr="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -18,7 +18,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private final String ORGANIZATION_KEY = "ORGANIZATION_KEY";
     EditText edtEmail,edtPassword;
     Button btnSignIn, btnSignUp;
-    //SharedPreferences pref = getApplicationContext().getSharedPreferences("bigheart.escuelaing", Context.MODE_PRIVATE);
+    //SharedPreferences pref = this.getSharedPreferences("bigheart.escuelaing", Context.MODE_PRIVATE);
     //SharedPreferences.Editor ed = pref.edit();
 
     @Override

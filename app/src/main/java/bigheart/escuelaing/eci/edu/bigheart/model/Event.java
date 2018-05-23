@@ -10,6 +10,7 @@ import java.util.List;
 public class Event  implements Serializable{
 
 
+
     private int maxVolunteers;
     private int numberVolunteers;
     private String eventType;

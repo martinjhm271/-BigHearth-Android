@@ -36,6 +36,19 @@ public class NetworkEventImpl implements NetworkEvent {
 
 
     @Override
+    public void createEvent(final Event event, final int NIT, final RequestCallback<Event> requestCallback) {
+        backgroundExecutor.execute( new Runnable() {
+            @Override
+            public void run() {
+                Call<Event> call = nse.createEvent(event, NIT);
+                try {
+                    Response<Event> execute = call.execute();
+                    requestCallback.onSuccess(execute.body());
+                } catch (Exception e) {
+                }
+            }
+        });
+    }
     public void getAllEvents(final RequestCallback<List<Event>> requestCallback) {
         backgroundExecutor.execute(new Runnable() {
             @Override
