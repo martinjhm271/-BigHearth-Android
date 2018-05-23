@@ -28,17 +28,17 @@ public class NetworkEventImpl implements NetworkEvent {
 
     private static final String BASE_URL = "http://104.211.48.12:8080/";
     private NetworkServiceEvent nse;
-    private ExecutorService backgroundExecutor = Executors.newFixedThreadPool( 1 );
+    private ExecutorService backgroundExecutor = Executors.newFixedThreadPool(1);
 
     public NetworkEventImpl() {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl( BASE_URL ).addConverterFactory( GsonConverterFactory.create() ).build();
-        nse = retrofit.create( NetworkServiceEvent.class );
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        nse = retrofit.create(NetworkServiceEvent.class);
     }
 
 
     @Override
     public void createEvent(final Event event, final int NIT, final RequestCallback<Event> requestCallback) {
-        backgroundExecutor.execute( new Runnable() {
+        backgroundExecutor.execute(new Runnable() {
             @Override
             public void run() {
                 Call<Event> call = nse.createEvent(event, NIT);
@@ -50,21 +50,21 @@ public class NetworkEventImpl implements NetworkEvent {
             }
         });
     }
+
     public void getAllEvents(final RequestCallback<List<Event>> requestCallback) {
         backgroundExecutor.execute(new Runnable() {
             @Override
             public void run() {
                 Call<List<Event>> call = nse.getAllEvents();
                 try {
-                    Response<List<Event>> execute =call.execute();
+                    Response<List<Event>> execute = call.execute();
                     requestCallback.onSuccess(execute.body());
-                }
-                catch ( Exception e ) {
+                } catch (Exception e) {
                     System.out.println(e.getMessage());
-                    requestCallback.onFailed( new NetworkException( null, e ) );
+                    requestCallback.onFailed(new NetworkException(null, e));
                 }
             }
-        } );
+        });
     }
 
 
@@ -75,75 +75,71 @@ public class NetworkEventImpl implements NetworkEvent {
             public void run() {
                 Call<Event> call = nse.getEventById(idEvent);
                 try {
-                    Response<Event> execute =call.execute();
+                    Response<Event> execute = call.execute();
                     requestCallback.onSuccess(execute.body());
-                }
-                catch ( Exception e ) {
+                } catch (Exception e) {
                     System.out.println(e.getMessage());
-                    requestCallback.onFailed( new NetworkException( null, e ) );
+                    requestCallback.onFailed(new NetworkException(null, e));
                 }
             }
-        } );
+        });
     }
 
     @Override
     public void setEventImage(final String eventId, final MultipartBody.Part m, final RequestCallback<Event> requestCallback) {
 
-        backgroundExecutor.execute( new Runnable() {
+        backgroundExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                Call<Event> call = nse.setEventImage(eventId,m);
+                Call<Event> call = nse.setEventImage(eventId, m);
                 try {
-                    Response<Event> execute =call.execute();
-                    requestCallback.onSuccess( execute.body() );
-                }
-                catch ( Exception e ) {
+                    Response<Event> execute = call.execute();
+                    requestCallback.onSuccess(execute.body());
+                } catch (Exception e) {
                     System.out.println(e.getMessage());
                     System.out.println(e.getStackTrace());
-                    requestCallback.onFailed( new NetworkException( null, e ) );
+                    requestCallback.onFailed(new NetworkException(null, e));
                 }
             }
-        } );
+        });
 
     }
 
     @Override
     public void unrol(final String eventId, final String email, final RequestCallback<Boolean> requestCallback) {
-        backgroundExecutor.execute( new Runnable() {
+        backgroundExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                Call<Boolean> call = nse.unrol(eventId,email);
+                Call<Boolean> call = nse.unrol(eventId, email);
                 try {
-                    Response<Boolean> execute =call.execute();
-                    requestCallback.onSuccess( execute.body() );
-                }
-                catch ( Exception e ) {
+                    Response<Boolean> execute = call.execute();
+                    requestCallback.onSuccess(execute.body());
+                } catch (Exception e) {
                     System.out.println(e.getMessage());
                     System.out.println(e.getStackTrace());
-                    requestCallback.onFailed( new NetworkException( null, e ) );
+                    requestCallback.onFailed(new NetworkException(null, e));
                 }
             }
-        } );
+        });
     }
 
     @Override
     public void rol(final String eventId, final String email, final RequestCallback<Boolean> requestCallback) {
 
-        backgroundExecutor.execute( new Runnable() {
+        backgroundExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                Call<Boolean> call = nse.rol(eventId,email);
+                Call<Boolean> call = nse.rol(eventId, email);
                 try {
-                    Response<Boolean> execute =call.execute();
-                    requestCallback.onSuccess( execute.body() );
-                }
-                catch ( Exception e ) {
+                    Response<Boolean> execute = call.execute();
+                    requestCallback.onSuccess(execute.body());
+                } catch (Exception e) {
                     System.out.println(e.getMessage());
                     System.out.println(e.getStackTrace());
-                    requestCallback.onFailed( new NetworkException( null, e ) );
+                    requestCallback.onFailed(new NetworkException(null, e));
                 }
             }
-        } );
+        });
     }
 
     @Override
@@ -158,21 +154,21 @@ public class NetworkEventImpl implements NetworkEvent {
         System.out.println("--------------------------");
         System.out.println("--------------------------");
 
-        backgroundExecutor.execute( new Runnable() {
+        backgroundExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                Call<Boolean> call = nse.volunteerInEvent(eventId,email);
+                Call<Boolean> call = nse.volunteerInEvent(eventId, email);
                 try {
-                    Response<Boolean> execute =call.execute();
-                    requestCallback.onSuccess( execute.body() );
-                }
-                catch ( Exception e ) {
+                    Response<Boolean> execute = call.execute();
+                    requestCallback.onSuccess(execute.body());
+                } catch (Exception e) {
                     System.out.println(e.getMessage());
-                    requestCallback.onFailed( new NetworkException( null, e ) );
+                    requestCallback.onFailed(new NetworkException(null, e));
                 }
             }
-        } );
-    }
+        });
 
+
+    }
 
 }

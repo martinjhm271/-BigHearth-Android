@@ -129,7 +129,7 @@ public class Test2Fragment extends Fragment {
 
 
     private void configureRecyclerView(){
-        rvAllEvents = v.findViewById(R.id.eventrecyclerview);
+        rvAllEvents = v.findViewById(R.id.eventrecyclerview2);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(v.getContext());
         rvAllEvents.setLayoutManager(layoutManager);
         loadEvents();

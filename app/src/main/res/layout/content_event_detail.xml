@@ -24,18 +24,12 @@
 
             />
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/imageE"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imageE"
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/flag_colombia" />
-        </LinearLayout>
+            android:layout_height="183dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/flag_colombia" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -210,16 +204,9 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="192dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Unrol/Rol" />
-
             <Button
                 android:id="@+id/button3"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Button" />

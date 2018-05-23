@@ -3,8 +3,8 @@
     <string name="title_activity_login">Login</string>
     <string name="title_activity_registration_volunteer">RegistrationVolunteerActivity</string>
     <string name="title_activity_registration_organization">RegistrationOrganizationActivity</string>
-	<string name="title_activity_new_event">NewEventActivity</string>
-	<string-array name="types_volunteers">
+    <string name="title_activity_new_event">NewEventActivity</string>
+    <string-array name="types_volunteers">
         <item>AMBIENTAL</item>
         <item>COMUNITARIO</item>
         <item>CULTURAL</item>

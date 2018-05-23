@@ -92,7 +92,7 @@ public class EventDetailActivity extends AppCompatActivity implements OnMapReady
         maxVE= findViewById(R.id.maxVE);
         actualVE= findViewById(R.id.actualVE);
         descriptionE= findViewById(R.id.descriptionE);
-        buttontext= findViewById(R.id.textView12);
+
         this.b=findViewById(R.id.button3);
 
 

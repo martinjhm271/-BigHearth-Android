@@ -5,11 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.Test2Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/eventrecyclerview2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Test2"
-        android:textAlignment="center" />
+        android:scrollbars="vertical"/>
 
 </FrameLayout>
