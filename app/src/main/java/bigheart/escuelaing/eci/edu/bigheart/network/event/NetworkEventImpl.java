@@ -2,10 +2,12 @@ package bigheart.escuelaing.eci.edu.bigheart.network.event;
 
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import bigheart.escuelaing.eci.edu.bigheart.model.Event;
+import bigheart.escuelaing.eci.edu.bigheart.model.Organization;
 import bigheart.escuelaing.eci.edu.bigheart.network.login.LoginWrapper;
 import bigheart.escuelaing.eci.edu.bigheart.network.login.Token;
 import bigheart.escuelaing.eci.edu.bigheart.network.service.NetworkException;
@@ -38,12 +40,26 @@ public class NetworkEventImpl implements NetworkEvent {
         backgroundExecutor.execute( new Runnable() {
             @Override
             public void run() {
-                Call<Event> call = nse.createEvent(event,NIT);
+                Call<Event> call = nse.createEvent(event, NIT);
                 try {
-                    Response<Event> execute =call.execute();
-                    requestCallback.onSuccess( execute.body() );
+                    Response<Event> execute = call.execute();
+                    requestCallback.onSuccess(execute.body());
+                } catch (Exception e) {
+                }
+            }
+        });
+    }
+    public void getAllEvents(final RequestCallback<List<Event>> requestCallback) {
+        backgroundExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                Call<List<Event>> call = nse.getAllEvents();
+                try {
+                    Response<List<Event>> execute =call.execute();
+                    requestCallback.onSuccess(execute.body());
                 }
                 catch ( Exception e ) {
+                    System.out.println(e.getMessage());
                     requestCallback.onFailed( new NetworkException( null, e ) );
                 }
             }

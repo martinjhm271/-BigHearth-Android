@@ -2,14 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="bigheart.escuelaing.eci.edu.bigheart">
 
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
 
     <application
         android:allowBackup="true"
@@ -29,6 +27,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+        <activity android:name=".ui.RegistrationVolunteerActivity" />
+        <activity android:name=".ui.RegistrationOrganizationActivity" />
+        <activity android:name=".ui.SingUpActivity" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,14 +37,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.RegistrationVolunteerActivity"
-            android:label="@string/title_activity_registration_volunteer"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.RegistrationOrganizationActivity"
-            android:label="@string/title_activity_registration_organization"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
 		<activity
             android:name=".ui.NewEventActivity"
             android:label="@string/title_activity_new_event"

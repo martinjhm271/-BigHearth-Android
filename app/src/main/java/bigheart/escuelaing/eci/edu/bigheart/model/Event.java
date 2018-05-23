@@ -1,13 +1,10 @@
 package bigheart.escuelaing.eci.edu.bigheart.model;
 
-
-
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-
 
 
 public class Event  implements Serializable{
@@ -158,6 +155,11 @@ public class Event  implements Serializable{
 
     public void setNumberVolunteers(int numberVolunteers) {
         this.numberVolunteers = numberVolunteers;
+    }
+
+    public String getDateFormat(){
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        return dt.format(this.eventDate);
     }
 
     public String getName() {

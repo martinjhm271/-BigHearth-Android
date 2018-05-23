@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 
 import bigheart.escuelaing.eci.edu.bigheart.model.Event;
 import bigheart.escuelaing.eci.edu.bigheart.model.Organization;
+
 import bigheart.escuelaing.eci.edu.bigheart.model.Volunteer;
 import bigheart.escuelaing.eci.edu.bigheart.network.service.NetworkException;
 import bigheart.escuelaing.eci.edu.bigheart.network.service.NetworkServiceVolunteer;
@@ -22,7 +23,7 @@ import okhttp3.MultipartBody.Part;
 
 public class NetworkVolunteerImpl implements NetworkVolunteer {
 
-    private static final String BASE_URL = "http://autenticationserver.herokuapp.com/";
+    private static final String BASE_URL = "https://bighearth.herokuapp.com/volunteer/";
     private NetworkServiceVolunteer nsv;
     private ExecutorService backgroundExecutor = Executors.newFixedThreadPool( 1 );
 
@@ -76,7 +77,21 @@ public class NetworkVolunteerImpl implements NetworkVolunteer {
     }
 
     @Override
-    public void setVolunteerImage(String email, Part m, RequestCallback<Volunteer> requestCallback) {
+    public void setVolunteerImage(final String email, final Part m, final RequestCallback<Volunteer> requestCallback) {
+
+        backgroundExecutor.execute( new Runnable() {
+            @Override
+            public void run() {
+                Call<Volunteer> call = nsv.setVolunteerImage(email,m);
+                try {
+                    Response<Volunteer> execute =call.execute();
+                    requestCallback.onSuccess( execute.body() );
+                }
+                catch ( Exception e ) {
+                    requestCallback.onFailed( new NetworkException( null, e ) );
+                }
+            }
+        } );
 
     }
 
