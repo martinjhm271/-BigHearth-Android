@@ -38,7 +38,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        pref = this.getSharedPreferences("bigheart.escuelaing", Context.MODE_PRIVATE);
+        pref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         ed = pref.edit();
         nli= new NetworkLoginImpl();
         edtEmail = findViewById(R.id.edtEmail);
@@ -69,7 +69,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                                     ed.putString(USER_KEY,edtEmail.getText().toString());
                                     ed.putString(USER_ROL_KEY,response.getRol());
                                     ed.putString(TOKEN_KEY,response.getAccessToken());
-                                    ed.commit();
+                                    ed.apply();
                                     Intent intent = new Intent(c,MainActivity.class);
                                     startActivity(intent);
                                 }

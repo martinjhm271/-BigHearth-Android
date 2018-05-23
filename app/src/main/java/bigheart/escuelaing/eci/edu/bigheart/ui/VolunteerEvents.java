@@ -26,7 +26,7 @@ public class VolunteerEvents extends AppCompatActivity {
     private NetworkVolunteer nei;
     private List<Event> allEvents;
     ProgressDialog progressDialog;
-    SharedPreferences pref = getApplicationContext().getSharedPreferences("bigheart.escuelaing", Context.MODE_PRIVATE);
+    SharedPreferences pref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

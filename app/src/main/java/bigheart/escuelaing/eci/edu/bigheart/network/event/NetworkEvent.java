@@ -20,4 +20,5 @@ public interface NetworkEvent {
 
     void unrol(String eventId,String email,RequestCallback<Boolean> requestCallback);
     void rol(String eventId,String email,RequestCallback<Boolean> requestCallback);
+    void volunteerInEvent(String eventId,String email,RequestCallback<Boolean> requestCallback);
 }

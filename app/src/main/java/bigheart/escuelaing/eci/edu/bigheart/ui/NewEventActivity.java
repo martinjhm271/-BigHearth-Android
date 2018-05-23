@@ -84,7 +84,7 @@ public class NewEventActivity extends AppCompatActivity implements OnMapReadyCal
 
     final int REQUEST_CAMERA = 1;
     final int SELECT_FILE = 2;
-    private final String ORGANIZATION_KEY = "ORGANIZATION_KEY";
+    private final String USER_KEY = "USER_KEY";
 
 
     private NetworkEventImpl networkEvent;
@@ -193,8 +193,8 @@ public class NewEventActivity extends AppCompatActivity implements OnMapReadyCal
 
     private void saveEventRED() {
 
-        //final String emailOrganization = sharedPref.getString(ORGANIZATION_KEY,"");
-        final String emailOrganization ="test@mail.es";
+        final String emailOrganization = sharedPref.getString(USER_KEY,"");
+        //final String emailOrganization ="test@mail.es";
         final int[] NIT = new int[1];
         if(emailOrganization.equals("")){
         }else{

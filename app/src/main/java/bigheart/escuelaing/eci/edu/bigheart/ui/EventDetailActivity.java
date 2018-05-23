@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,14 +46,19 @@ import bigheart.escuelaing.eci.edu.bigheart.maps.AddressResultListener;
 import bigheart.escuelaing.eci.edu.bigheart.maps.AddressResultReceiver;
 import bigheart.escuelaing.eci.edu.bigheart.maps.FetchAddressIntentService;
 import bigheart.escuelaing.eci.edu.bigheart.model.Event;
+import bigheart.escuelaing.eci.edu.bigheart.model.Volunteer;
 import bigheart.escuelaing.eci.edu.bigheart.network.event.NetworkEventImpl;
 import bigheart.escuelaing.eci.edu.bigheart.network.service.NetworkException;
 import bigheart.escuelaing.eci.edu.bigheart.network.service.RequestCallback;
+import bigheart.escuelaing.eci.edu.bigheart.network.volunteer.NetworkVolunteer;
+import bigheart.escuelaing.eci.edu.bigheart.network.volunteer.NetworkVolunteerImpl;
 
 public class EventDetailActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private NetworkEventImpl networkEvent;
-
+    private NetworkVolunteerImpl networkVolunteer;
+    private final String USER_KEY = "USER_KEY";
+    private final String USER_ROL_KEY = "USER_ROL_KEY";
     private String latitudes="",longitudes="";
     private GoogleMap mMap;
     private final int ACCESS_LOCATION_PERMISSION_CODE = 0;
@@ -59,8 +66,12 @@ public class EventDetailActivity extends AppCompatActivity implements OnMapReady
     private LocationRequest locationRequest;
 
     private ImageView imageE;
-    private TextView nameE,fechaE,typesE,maxVE,actualVE,descriptionE;
+    private TextView nameE,fechaE,typesE,maxVE,actualVE,descriptionE,buttontext;
     Button b;
+    SharedPreferences sharedPref;
+    Event e;
+    Context c =this;
+    boolean inEvent;
 
 
     @Override
@@ -69,9 +80,10 @@ public class EventDetailActivity extends AppCompatActivity implements OnMapReady
         setContentView(R.layout.activity_event_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        sharedPref= this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         Intent intent = getIntent();
         networkEvent = new NetworkEventImpl();
+        networkVolunteer = new NetworkVolunteerImpl();
         final String idEvent = intent.getStringExtra("EventDetail");
         imageE=findViewById(R.id.imageE);
         nameE = findViewById(R.id.nameE);
@@ -80,7 +92,9 @@ public class EventDetailActivity extends AppCompatActivity implements OnMapReady
         maxVE= findViewById(R.id.maxVE);
         actualVE= findViewById(R.id.actualVE);
         descriptionE= findViewById(R.id.descriptionE);
+        buttontext= findViewById(R.id.textView12);
         this.b=findViewById(R.id.button3);
+
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,18 +103,58 @@ public class EventDetailActivity extends AppCompatActivity implements OnMapReady
             }
         });
 
+        final String email = sharedPref.getString(USER_KEY,"");
+        final String rol = sharedPref.getString(USER_ROL_KEY,"");
+
+
+
         ExecutorService executorService = Executors.newFixedThreadPool(1);
         executorService.execute( new Runnable() {
             @Override
             public void run() {
-
                 networkEvent.getEventById(idEvent, new RequestCallback<Event>() {
-
                     @Override
                     public void onSuccess(final Event response) {
-                        System.out.println("-------------------------");
-                        System.out.println(response.toString());
-                        System.out.println("-------------------------");
+                        e=response;
+                        if(rol.equals("Organization")){
+                            b.setVisibility(View.INVISIBLE);
+                            buttontext.setVisibility(View.INVISIBLE);
+                        }
+                        else{
+                            networkEvent.volunteerInEvent(Integer.toString(e.getId()), email, new RequestCallback<Boolean>() {
+                                @Override
+                                public void onSuccess(Boolean response) {
+                                    inEvent=response;
+                                    if(response){
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                b.setText("UnRol");
+                                                int color = Color.parseColor("#ff0000");
+                                                b.setBackgroundColor(color);
+                                            }
+                                        });
+                                    }
+                                    else{
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                b.setText("Rol");
+                                                int color = Color.parseColor("#99ff33");
+                                                b.setBackgroundColor(color);
+                                            }
+                                        });
+                                    }
+                                }
+                                @Override
+                                public void onFailed(NetworkException e) {
+                                    System.out.println(e.getMessage());
+                                }
+                            });
+                        }
+
+
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -134,8 +188,69 @@ public class EventDetailActivity extends AppCompatActivity implements OnMapReady
     }
 
     public void unrolRol(){
-        //networkEvent.
+        final String email = sharedPref.getString(USER_KEY,"");
+        final String rol = sharedPref.getString(USER_ROL_KEY,"");
+        if(rol.equals("Volunteer")){
+            ExecutorService executorService = Executors.newFixedThreadPool(1);
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    if(inEvent){
+                        networkEvent.unrol(Integer.toString(e.getId()), email, new RequestCallback<Boolean>() {
+                            @Override
+                            public void onSuccess(Boolean response) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(c,"UnRol success!!!!",Toast.LENGTH_SHORT).show();
+                                        b.setText("Rol");
+                                        int color = Color.parseColor("#99ff33");
+                                        b.setBackgroundColor(color);
+                                    }
+                                });
+                            }
 
+                            @Override
+                            public void onFailed(NetworkException e) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(c,"UnRol error!!!! , Try again!!!!",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                    else{
+                        networkEvent.rol(Integer.toString(e.getId()), email, new RequestCallback<Boolean>() {
+                            @Override
+                            public void onSuccess(Boolean response) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(c,"Rol success!!!!",Toast.LENGTH_SHORT).show();
+                                        b.setText("UnRol");
+                                        int color = Color.parseColor("#ff0000");
+                                        b.setBackgroundColor(color);
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onFailed(NetworkException e) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(c,"Rol error!!!! , Try again!!!!",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        });
+
+                    }
+                }
+            });
+        }
     }
 
     @Override

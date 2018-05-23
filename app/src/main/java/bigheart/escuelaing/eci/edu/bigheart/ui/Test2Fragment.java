@@ -48,7 +48,7 @@ public class Test2Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.v= inflater.inflate(R.layout.fragment_test2, container, false);
-        pref=v.getContext().getSharedPreferences("bigheart.escuelaing", Context.MODE_PRIVATE);
+        pref=v.getContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
         allEvents = new ArrayList<>();
         progressDialog = new ProgressDialog(v.getContext());

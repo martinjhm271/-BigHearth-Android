@@ -107,5 +107,72 @@ public class NetworkEventImpl implements NetworkEvent {
 
     }
 
+    @Override
+    public void unrol(final String eventId, final String email, final RequestCallback<Boolean> requestCallback) {
+        backgroundExecutor.execute( new Runnable() {
+            @Override
+            public void run() {
+                Call<Boolean> call = nse.unrol(eventId,email);
+                try {
+                    Response<Boolean> execute =call.execute();
+                    requestCallback.onSuccess( execute.body() );
+                }
+                catch ( Exception e ) {
+                    System.out.println(e.getMessage());
+                    System.out.println(e.getStackTrace());
+                    requestCallback.onFailed( new NetworkException( null, e ) );
+                }
+            }
+        } );
+    }
+
+    @Override
+    public void rol(final String eventId, final String email, final RequestCallback<Boolean> requestCallback) {
+
+        backgroundExecutor.execute( new Runnable() {
+            @Override
+            public void run() {
+                Call<Boolean> call = nse.rol(eventId,email);
+                try {
+                    Response<Boolean> execute =call.execute();
+                    requestCallback.onSuccess( execute.body() );
+                }
+                catch ( Exception e ) {
+                    System.out.println(e.getMessage());
+                    System.out.println(e.getStackTrace());
+                    requestCallback.onFailed( new NetworkException( null, e ) );
+                }
+            }
+        } );
+    }
+
+    @Override
+    public void volunteerInEvent(final String eventId, final String email, final RequestCallback<Boolean> requestCallback) {
+
+        System.out.println("--------------------------");
+        System.out.println("--------------------------");
+        System.out.println("--------------------------");
+        System.out.println(eventId);
+        System.out.println(email);
+        System.out.println("--------------------------");
+        System.out.println("--------------------------");
+        System.out.println("--------------------------");
+
+        backgroundExecutor.execute( new Runnable() {
+            @Override
+            public void run() {
+                Call<Boolean> call = nse.volunteerInEvent(eventId,email);
+                try {
+                    Response<Boolean> execute =call.execute();
+                    requestCallback.onSuccess( execute.body() );
+                }
+                catch ( Exception e ) {
+                    System.out.println(e.getMessage());
+                    requestCallback.onFailed( new NetworkException( null, e ) );
+                }
+            }
+        } );
+    }
+
 
 }
